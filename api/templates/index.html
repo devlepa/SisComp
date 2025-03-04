@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Contenedores</title>
+    <script>
+        async function createImage(containerId) {
+            let imageName = prompt("Ingrese el nombre de la imagen:");
+            if (!imageName) return;
+            
+            let response = await fetch(`/create_image/${containerId}?image_name=${imageName}`, { method: "POST" });
+            let data = await response.json();
+            alert(data.message);
+        }
+    </script>
+</head>
+<body>
+    <h1>Lista de Contenedores</h1>
+    <ul>
+        {% for container in containers %}
+        <li>
+            {{ container.name }} - {{ container.status }}
+            <button onclick="createImage('{{ container.id }}')">Crear Imagen</button>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
