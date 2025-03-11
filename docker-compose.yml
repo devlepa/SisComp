@@ -8,7 +8,8 @@ services:
     networks:
       - blockchain_net
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock  # Permitir acceso a Docker en el host
+      - /var/run/docker.sock:/var/run/docker.sock  # Acceso a Docker en el host
+      - blockchain_data:/app/data
 
   api2:
     build: .
@@ -18,16 +19,21 @@ services:
       - blockchain_net
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - blockchain_data:/app/data
 
-  api3:  # Nuevo contenedor API3
+  api3:
     build: .
     ports:
       - "8003:8000"
     networks:
       - blockchain_net
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock  # Permitir acceso a Docker en el host
+      - /var/run/docker.sock:/var/run/docker.sock
+      - blockchain_data:/app/data
 
 networks:
   blockchain_net:
     driver: bridge
+
+volumes:
+  blockchain_data:
