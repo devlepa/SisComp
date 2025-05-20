@@ -23,7 +23,6 @@ VOLUME ["/var/run/docker.sock"]
 # Copia el archivo de requerimientos e instala las dependencias de Python
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
-RUN pip3 install jinja2
 
 # Copia el resto del código de la aplicación
 COPY . .
