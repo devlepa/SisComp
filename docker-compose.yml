@@ -1,49 +1,172 @@
 version: '3.8'
-
 services:
   api1:
     build: .
     ports:
-      - "8001:8000"
+    - 8001:8000
     networks:
-      - blockchain_net
+    - blockchain_net
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock  # Acceso a Docker en el host
-      - blockchain_data:/app/data
-
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api1
   api2:
     build: .
     ports:
-      - "8002:8000"
+    - 8002:8000
     networks:
-      - blockchain_net
+    - blockchain_net
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - blockchain_data:/app/data
-
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api2
   api3:
     build: .
     ports:
-      - "8003:8000"
+    - 8003:8000
     networks:
-      - blockchain_net
+    - blockchain_net
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - blockchain_data:/app/data
-  
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api3
   api4:
     build: .
     ports:
-      - "8004:8000"
+    - 8004:8000
     networks:
-      - blockchain_net
+    - blockchain_net
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - blockchain_data:/app/data
-
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api4
+  api5:
+    build: .
+    ports:
+    - 8005:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api5
+  api6:
+    build: .
+    ports:
+    - 8006:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api6
+  api7:
+    build: .
+    ports:
+    - 8007:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api7
+  api8:
+    build: .
+    ports:
+    - 8008:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api8
+  api9:
+    build: .
+    ports:
+    - 8009:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api9
+  api10:
+    build: .
+    ports:
+    - 8010:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api10
+  api11:
+    build: .
+    ports:
+    - 8011:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api11
+  api12:
+    build: .
+    ports:
+    - 8012:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api12
+  api13:
+    build: .
+    ports:
+    - 8013:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api13
+  api14:
+    build: .
+    ports:
+    - 8014:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api14
+  api15:
+    build: .
+    ports:
+    - 8015:8000
+    networks:
+    - blockchain_net
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - blockchain_data:/app/data
+    environment:
+      CONTAINER_NAME: api15
 networks:
   blockchain_net:
     driver: bridge
-
 volumes:
-  blockchain_data:
+  blockchain_data: {}

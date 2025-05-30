@@ -7,6 +7,8 @@ class Blockchain:
     def __init__(self, file_path="/app/data/blockchain.json"):
         self.file_path = file_path
         self.chain = []
+        # Asegurar que el directorio existe
+        os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
         # Si existe el archivo de la blockchain, lo carga; si no, crea el bloque génesis.
         if os.path.exists(self.file_path):
             self.load_chain()
@@ -27,7 +29,14 @@ class Blockchain:
             "data": data
         }
         self.chain.append(block)
-        self.save_chain()
+        try:
+            self.save_chain()  # Guardar inmediatamente después de añadir el bloque
+            print(f"Bloque {block['index']} creado y guardado")
+        except Exception as e:
+            print(f"Error al guardar el bloque {block['index']}: {str(e)}")
+            # Revertir la adición del bloque si no se pudo guardar
+            self.chain.pop()
+            raise
         return block
 
     def get_previous_block(self):
@@ -65,15 +74,30 @@ class Blockchain:
 
     def save_chain(self):
         try:
+            # Asegurar que el directorio existe
+            os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
+            # Guardar la blockchain
             with open(self.file_path, 'w') as f:
                 json.dump(self.chain, f, indent=4)
+            print(f"Blockchain guardada exitosamente en {self.file_path}")
         except Exception as e:
-            print("Error guardando la blockchain:", e)
+            print(f"Error guardando la blockchain en {self.file_path}: {str(e)}")
+            raise  # Re-lanzar la excepción para manejo superior
 
     def load_chain(self):
         try:
-            with open(self.file_path, 'r') as f:
-                self.chain = json.load(f)
+            if os.path.exists(self.file_path):
+                with open(self.file_path, 'r') as f:
+                    self.chain = json.load(f)
+                print(f"Blockchain cargada exitosamente desde {self.file_path}")
+                # Verificar si la cadena está vacía
+                if not self.chain:
+                    print("Blockchain vacía, creando bloque génesis")
+                    self.create_genesis_block()
+            else:
+                print(f"Archivo {self.file_path} no encontrado, creando bloque génesis")
+                self.create_genesis_block()
         except Exception as e:
-            print("Error cargando la blockchain:", e)
-            self.chain = []
+            print(f"Error cargando la blockchain desde {self.file_path}: {str(e)}")
+            print("Creando nueva blockchain con bloque génesis")
+            self.create_genesis_block()
